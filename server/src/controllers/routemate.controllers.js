@@ -62,7 +62,7 @@ const createRoute = asyncHandler( async (req,res)=>{
 
 const deleteRoute = asyncHandler( async (req,res)=>{
   const {_id:routeId} = req?.body
-
+  // console.log(routeId)
   if(!routeId && !mongoose.Types.ObjectId(routeId))
     throw new ApiError(404,"testing")
 
@@ -70,7 +70,7 @@ const deleteRoute = asyncHandler( async (req,res)=>{
     userId: req?.user?._id,
     _id: routeId
   })
-  if(routeExistingCheck)
+  if(!routeExistingCheck)
     throw new ApiError(404,"route don't exist",routeExistingCheck)
 
   const deleteRouteResponse = await RouteMate.deleteOne({
@@ -87,7 +87,7 @@ const deleteRoute = asyncHandler( async (req,res)=>{
 const findRoute = asyncHandler( async (req,res)=>{
   const queries = req.query;
   const schemaValidation = common.findRouteSchema.safeParse(queries)
-
+  // console.log("inside find route")
   if(!schemaValidation.success)
     throw new ApiError(404,"schema validation failed",JSON.parse(schemaValidation.error.message))
 
@@ -119,13 +119,38 @@ const findRoute = asyncHandler( async (req,res)=>{
 })
 
 const getAllRoute = asyncHandler( async (req,res) => {
+  const userId = req?.user?._id;
+  // console.log(req.user)
+  if(!userId)
+    throw new ApiError(404,"userId is invalid",userId);
   
+  const userRoutes = await RouteMate.find({userId});
+  
+
+  res.status(200).json(new ApiResponse(200,"user post fetched successfully",userRoutes))
 })
 
+const contactEmail = asyncHandler ( async (req,res) => {
+  const senderEmail = req?.user?.email
+  const {userId} = req?.body
+  // console.log(userId)
+  if(!userId)
+    throw new ApiError(404,"userId is invalid",userId);
+  const receiverCheck = await User.findOne({_id: userId})
+  if(!receiverCheck)
+    throw new ApiError(404,"user with userId don't exist",receiverCheck)
+
+  const email = receiverCheck.email;
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200,"valid email sending request",email));
+})  
 
 export {
   createRoute,
   deleteRoute,
   findRoute,
-  getAllRoute
+  getAllRoute,
+  contactEmail
 }
