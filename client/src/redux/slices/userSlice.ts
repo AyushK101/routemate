@@ -63,15 +63,25 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"; //!!
 //   authStatus: boolean
 // }
 
+export interface getCurrentUserApiType {
+  _id: string;
+  username: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+
 type userSliceState = {
-  _id: string | undefined
+  user: getCurrentUserApiType | undefined
   authStatus: boolean
 }
 
 
 const initialState: userSliceState = {
   authStatus: false,
-  _id: ""
+  user: undefined
 }
 
 const userSlice = createSlice({
@@ -80,11 +90,11 @@ const userSlice = createSlice({
   reducers: {
     loginUserSlice: (state,action: PayloadAction<userSliceState>) => {
       state.authStatus = action.payload.authStatus
-      state._id = action.payload._id
+      state.user = action.payload.user
     },
     logoutUserSlice: (state,action: PayloadAction<boolean>) => {
       state.authStatus = action.payload
-      state._id = undefined
+      state.user = undefined
     }
   }
 })

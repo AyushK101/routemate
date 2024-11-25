@@ -30,17 +30,17 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (status && isError) {
-      console.log(isError)
-      console.log(error)
+      // console.log(isError)
+      // console.log(error)
         dispatch(logoutUserSlice(false));
         navigate('/login'); // Navigate to login on error
     }
     if (status && isSuccess) {
-      console.log(data)
+      // console.log(data)
       if(!data?.data?._id) {
         throw new Error("data.data._id == userId is undefined");
       }
-      dispatch(loginUserSlice({ _id: data?.data?._id, authStatus: true }));
+      dispatch(loginUserSlice({ user: data?.data, authStatus: true }));
       toast("authenticated successfully",{duration: 800,icon: "✅"})
       navigate('/'); // Navigate to home on success
     }

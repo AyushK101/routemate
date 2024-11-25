@@ -4,13 +4,16 @@ import { useDispatch } from "react-redux";
 import { userApi } from "./apis/userApi";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { routemateApi } from "./apis/routemate";
+import searchFormReducer from './slices/searchSlice';
 
 
 export const store = configureStore({
   reducer: {
     userSlice: userReducer,
+    searchFormSlice: searchFormReducer,
     [userApi.reducerPath]: userApi.reducer,
     [routemateApi.reducerPath]: routemateApi.reducer,
+    
 
 
   },

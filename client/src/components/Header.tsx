@@ -9,7 +9,7 @@ import { useLogoutUserApiMutation } from '../redux/apis/userApi';
 
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const authStatus = useSelector((store: RootStore)=> store.userSlice.authStatus)
+  const {authStatus,user} = useSelector((store: RootStore)=> store.userSlice)
   const dispatch = useAppDispatch();
   const [logoutUserApi, {isError,isSuccess,error}] = useLogoutUserApiMutation()
   // const {showBoundary}= useErrorBoundary()
@@ -59,7 +59,10 @@ const Header = () => {
           <div>
             <Link to="#">About Us</Link>
           </div>
-          {authStatus ? (<Link to={'/login'} onClick={logoutFunc}>logout</Link>) : (<Link to={'/login'}>Login</Link>)}
+          {authStatus ? (
+              <>
+              <h1>{user?.username}</h1>
+              <Link to={'/login'} onClick={logoutFunc}>logout</Link></>) : (<Link to={'/'}>Login</Link>)}
         </div>
 
         {/* Mobile Menu */}
@@ -68,7 +71,11 @@ const Header = () => {
             <Link to="#">Features</Link>
             <Link to="#">Find Partners</Link>
             <Link to="#">About Us</Link>
-            {authStatus ? (<Link to={'/login'} onClick={logoutFunc}>logout</Link>) : (<Link to={'/'}>Login</Link>)}
+            {authStatus ? (
+              <>
+              <h1>{user?.username}</h1>
+              <Link to={'/login'} onClick={logoutFunc}>logout</Link></>) : (<Link to={'/'}>Login</Link>)}
+              
           </div>
         </div>
       </div>

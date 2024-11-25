@@ -9,6 +9,8 @@ import { useLazyFindRouteApiQuery } from '../redux/apis/routemate'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import Loading from './Loading'
+import { useAppDispatch } from '../redux/store'
+import { setSearchTable } from '../redux/slices/searchSlice'
 
 // interface customFindRouteErrorType {
 
@@ -18,12 +20,12 @@ const SearchForm = () => {
   const form = useForm<common.findRouteSchemaType>({
     resolver: zodResolver(common.findRouteSchema)
   })
-
-  const [findRouteApi,{isError,isLoading,isSuccess,data,error}] = useLazyFindRouteApiQuery()
+  const dispatch = useAppDispatch();
+  const [findRouteApi,{isError,isLoading,isSuccess,data,error,requestId}] = useLazyFindRouteApiQuery()
 
   // Async function to handle form submission
   async function searchFunc(data: common.findRouteSchemaType) {
-    const response = await findRouteApi(data)
+    const response = await findRouteApi(data,false)
     console.log({response})
     // console.log({data});
   }
@@ -35,14 +37,29 @@ const SearchForm = () => {
       // toast.error(`${}`)
     }
 
-    if(isSuccess) {
-      console.log(data)
+    // source: string;
+    // destination: string;
+    // travelDate: string;
+    // gender: string;
+    // mode: string;
+    // year: string;
+    // name: string;
+    // userId: string;
+
+    if(isSuccess ) {
+      // console.log(data)
+      const temp = data.data.map ( d => {
+        const { source, destination, travelDate, gender, mode, year, name, userId }  = d;
+        return {source, destination, travelDate, gender, mode, year, name, userId};
+      })
+      // console.log(temp)
+      dispatch(setSearchTable(temp))
       toast.success(`
         ${data.message}
         total routes: ${data.data.length}
         `,{icon: "🟢"})
     }
-  },[error, isError,data,isSuccess])
+  },[error, isError, data, isSuccess, form, requestId, dispatch])
 
   if(isLoading) return <Loading/>
 
@@ -127,7 +144,7 @@ const SearchForm = () => {
           </div>
 
           {/* Submit Button */}
-          <Button className='button-style'>
+          <Button className='button-style' disabled={isLoading}>
             Submit Details
           </Button>
         </form>

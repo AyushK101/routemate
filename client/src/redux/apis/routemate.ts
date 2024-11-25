@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URI, common } from "../../constants";
+import { findAllRouteResponseType, SendMailType } from "../../types";
 // import { ErrorResponse } from "../../types";
 
 type createRouteType = {
@@ -82,7 +83,11 @@ export const routemateApi = createApi({
           method: "GET",
         };
       },
-      providesTags: ["onRouteCreate"],
+      keepUnusedDataFor: 0,
+      /**
+      * @TODO check if caching is done in mutation or not. 
+      * providesTags: ["onRouteCreate"],
+      */ 
     }),
     deleteRouteApi: builder.mutation<deleteRouteType, { _id: string }>({
       query: (data) => ({
@@ -90,10 +95,21 @@ export const routemateApi = createApi({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["onRouteCreate"]
     }),
-    getAllUserRoutes: builder.query({
+    getAllUserRoutes: builder.query<findAllRouteResponseType,[]>({
       query: () => "/rm/all",
+      providesTags: ["onRouteCreate"]
     }),
+    sendMail: builder.mutation<SendMailType,{userId:string}>({
+      query: (data) => ({
+        url: "/rm/contact",
+        method: 'POST',
+        body: data
+      }),
+      invalidatesTags: ["onRouteCreate"] //! check necessity of tag later
+    })
+
   }),
 });
 
@@ -104,4 +120,5 @@ export const {
   useGetAllUserRoutesQuery,
   useLazyFindRouteApiQuery,
   useLazyGetAllUserRoutesQuery,
+  useSendMailMutation
 } = routemateApi;

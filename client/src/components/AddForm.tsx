@@ -11,7 +11,7 @@ import Loading from "./Loading";
 import { useEffect } from "react";
 // import { useState } from "react";
 
-interface customCreateRouteType {
+export interface customCreateRouteType {
   data: {
     error: {correctUser: string},
     message: string,

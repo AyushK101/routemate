@@ -1,9 +1,15 @@
 import React from 'react'
 
-const Container = ({children}: {children: React.ReactNode}) => {
+interface ContainerProp {
+  children: React.ReactNode,
+  className?: string,
+
+}
+
+const Container = ({children, className}: ContainerProp) => {
   return (
-    <div className='max-w-screen-xl mx-auto py-40'>
-      {children}
+    <div className={` max-w-screen-xl mx-auto py-40 ${className ?? className}`}>
+      {children} 
     </div>
   )
 }

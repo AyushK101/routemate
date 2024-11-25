@@ -8,32 +8,44 @@ import { useRegisterApiMutation } from "../redux/apis/userApi";
 import Loading from "./Loading";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../redux/store";
-import { loginUserSlice } from "../redux/slices/userSlice";
-import { useEffect } from "react";
+import { getCurrentUserApiType, loginUserSlice } from "../redux/slices/userSlice";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { customCreateRouteType } from "./AddForm";
 
 const Signup = () => {
-  const [registerApi, {isError,isLoading,isSuccess}] = useRegisterApiMutation()
+  const [registerApi, {isError,isLoading,isSuccess,error}] = useRegisterApiMutation()
   const dispatch = useAppDispatch()
   // const {showBoundary} = useErrorBoundary();
   const navigate =useNavigate()
-  
+  const [user,setUser] = useState<getCurrentUserApiType>(); 
+
   const form = useForm<common.userSchemaType>({
     resolver: zodResolver(common.userSchema), // Using zodResolver for validation
   });
 
   useEffect(()=>{
+    if(isError) {
+      console.log(error)
+      const customError = error as customCreateRouteType;
+      toast.success(`${customError?.data?.message}`,{icon:"🔴"})
+    }
     if( isSuccess ) {
-      dispatch(loginUserSlice({_id: "asdf",authStatus: true}))
+      dispatch(loginUserSlice({ user: user,authStatus: true}))
       toast.success('signup successful',{icon: "✅"})
       navigate('/')
     }
-  },[dispatch, isSuccess, navigate])
+  },[dispatch, error, isError, isSuccess, navigate, user])
 
   async function subFunc(data: common.userSchemaType) {
     const response = await registerApi(data)
     if(isError && response.error ) {
       // showBoundary(response.error)
+      console.log(error)
+
+    } else if (isSuccess) {
+      // console.log(response.data)
+      setUser(response.data?.data)
     }
     
   }

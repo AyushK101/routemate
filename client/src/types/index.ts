@@ -34,3 +34,41 @@ export interface genericErrorType<T> {
   message: string,
   errors: T
 }
+
+
+interface routeType {
+  userId: string;
+  name: string;
+  source: string;
+  destination: string;
+  gender: string;
+  travelDate: string;
+  year: string;
+  mode: string;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+export type tableDataType = Omit<routeType,"userId" | "_id" | "createdAt" | "updatedAt" | "__v"> & {
+  routeId: string
+}
+
+export type findAllRouteResponseType = genericResponseType<routeType[]>
+
+//! can omit "userId" also @TODO if contact feature not made
+export type SearchRouteTableType = Omit<routeType,"_id" | "createdAt" | "updatedAt" | "__v">
+
+
+export interface customErrorForResponseTable {
+  data: {
+    error: {correctUser: string},
+    message: string,
+    stack: string,
+    statusCode: number
+  },
+  status: number
+}
+
+export type SendMailType = genericResponseType<string>
