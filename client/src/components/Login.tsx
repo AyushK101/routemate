@@ -33,7 +33,7 @@ const Login = () => {
       // showBoundary(error)
     }
     console.log("isSuccess",isSuccess)
-  },[dispatch, error, isError, isSuccess, navigate])
+  },[data?.data?.user, dispatch, error, isError, isSuccess, navigate])
 
   async function subFunc(data: common.loginSchemaType) {
     await LoginUserApi(data)

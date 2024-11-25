@@ -1,16 +1,16 @@
-import { lazy, StrictMode, Suspense } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import App from './App'
-import { HomePage,LoginPage } from './pages'
+import { HomePage,LoginPage,SignupPage } from './pages'
 import { Loading } from './components'
 import { Provider } from 'react-redux'
 import { store } from './redux'
 import ProtectedRoute from './components/ProtectedRoute'
 import NotFound from './components/NotFound.tsx'
 // const LoginPage = lazy( ()=> import('./pages Page.tsx'))
-const SignupPage = lazy( ()=> import('./pages/SignupPage'))
+// const SignupPage = lazy( ()=> import('./pages/SignupPage'))
 /**
  * @ErrorBoundary
  * > router

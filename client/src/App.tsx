@@ -8,6 +8,7 @@ import { RootStore } from "./redux/store"
 
 function App() {
   const data = useSelector( (state: RootStore) => state.searchFormSlice.routes)
+  const authStatus = useSelector( (state: RootStore) => state.userSlice.authStatus)
   return (
     <>
     <div className="max-w-full">
@@ -15,8 +16,8 @@ function App() {
       <Toaster/>
       <Outlet/>
       {/* <BuggyComponent/> */}
-      {data?.length > 0 ?   <SearchRoutesTable data={data} /> : null}
-      <ResponseTable/>
+      {authStatus && (data?.length > 0 ?   <SearchRoutesTable data={data} /> : null)}
+      {authStatus && <ResponseTable/>}
       <Footer/>
     </div>
     </>

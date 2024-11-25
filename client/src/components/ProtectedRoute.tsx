@@ -30,7 +30,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (status && isError) {
-      // console.log(isError)
+      console.log(isError)
       // console.log(error)
         dispatch(logoutUserSlice(false));
         navigate('/login'); // Navigate to login on error
