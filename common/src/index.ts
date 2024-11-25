@@ -1,4 +1,4 @@
-import z, { string, TypeOf, ZodString } from 'zod'
+import z from 'zod'
 
 
 const userSchema = z.object({
@@ -44,9 +44,12 @@ export {
   routeSchema,
   userSchema,
   loginSchema,
+} 
+
+export type {
   userSchemaType,
   findRouteSchemaType,
   loginSchemaType,
   routeSchemaType
-} 
+}
 

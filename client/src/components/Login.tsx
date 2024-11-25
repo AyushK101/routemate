@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const [LoginUserApi,{isError,isLoading,isSuccess,error}] = useLoginUserApiMutation()
+  const [LoginUserApi,{isError,isLoading,isSuccess,error,data}] = useLoginUserApiMutation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   // const {showBoundary} = useErrorBoundary()
@@ -24,7 +24,7 @@ const Login = () => {
 
   useEffect( ()=> {
     if(isSuccess) {
-      dispatch(loginUserSlice({_id:"sdfsdf", authStatus: true}))
+      dispatch(loginUserSlice({user: data?.data?.user, authStatus: true}))
       toast.success("logged in successfully",{icon: "✅"})
       navigate('/')
     }
