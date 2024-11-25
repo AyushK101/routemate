@@ -1,4 +1,4 @@
-import z, { string, ZodString } from 'zod'
+import z from 'zod'
 
 
 const userSchema = z.object({
@@ -7,11 +7,14 @@ const userSchema = z.object({
   password: z.string().min(4,{message: "password must be at least 4 char"})
 })
 
+// type userSchemaType = z.infer<typeof userSchema>
+
 const loginSchema = z.object({
   email: z.string().email({message: "invalid email format"}),
   password: z.string().min(4,{message: "password must be at least 4 char"})
 })
 
+// type loginSchemaType = z.infer<typeof loginSchema>
 
 const routeSchema = z.object({
   name: z.string().min(4, {message: "name can't be less than 4 char"}),
@@ -23,6 +26,7 @@ const routeSchema = z.object({
   mode: z.enum(["car","bus","train","bike"])
 })
 
+// type routeSchemaType = z.infer<typeof routeSchema>
 
 const findRouteSchema = z.object({
   source: z.string(),
@@ -33,10 +37,16 @@ const findRouteSchema = z.object({
   year: z.enum(["1","2","3","4","all"])
 })
 
+// type findRouteSchemaType = z.infer<typeof findRouteSchema>
+
 export {
   findRouteSchema,
   routeSchema,
   userSchema,
-  loginSchema
+  loginSchema,
+  // userSchemaType,
+  // findRouteSchemaType,
+  // loginSchemaType,
+  // routeSchemaType
 } 
 

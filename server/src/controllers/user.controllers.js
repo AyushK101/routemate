@@ -2,7 +2,7 @@ import { User } from "../models/user.models.js";
 import ApiError from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import * as common from '../../../common/src/index.js'
+import * as common from '../utils/types.js';
 
 const Signup = asyncHandler(async (req, res) => {
     const { username, email, password } = req?.body;
@@ -92,9 +92,21 @@ const deleteUser = asyncHandler( async (req,res)=>{
     .json(new ApiResponse(200,"user deleted successfully",{deleteResponse,checkUser}))  
 })
 
+const getCurrentUser = asyncHandler( async (req, res)=>{
+
+  res.status(200).
+  json(new ApiResponse(
+    200,
+    "current user fetched successfully",
+    req.user
+  )
+  )
+})
+
 export { 
   Signup,
   Login,
   Logout,
-  deleteUser
+  deleteUser,
+  getCurrentUser
 };

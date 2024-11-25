@@ -1,7 +1,7 @@
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import * as common from '../../../common/src/index.js'
+import * as common from '../utils/types.js'
 import { RouteMate } from "../models/routemate.models.js";
 import { User } from "../models/user.models.js";
 import mongoose from "mongoose";
@@ -15,7 +15,7 @@ const createRoute = asyncHandler( async (req,res)=>{
   const {name, source, destination, gender, mode, travelDate, year } = schemaValidation.data
 
   const validDateCheck = (new Date(schemaValidation.data.travelDate).getTime()) < (new Date().getTime())
-  if(!validDateCheck)
+  if(validDateCheck)
     throw new ApiError(404,"Date can't be in past.")
 
   const userId = (req?.user?._id)
@@ -26,10 +26,8 @@ const createRoute = asyncHandler( async (req,res)=>{
   const sameNameCheck = await User.findById(userId);
 
   if(name !=sameNameCheck.username)
-    throw new ApiError(404,`
-      Name don't matched with username.
-      Will create ambiguity in DB.
-    `,{correctUser: sameNameCheck.username})
+    throw new ApiError(404,`Name don't matched with username. Will create ambiguity in DB.`,
+  {correctUser: sameNameCheck.username})
 
 
   if(!mongoose.Types.ObjectId.isValid(sameNameCheck._id))
@@ -87,7 +85,9 @@ const deleteRoute = asyncHandler( async (req,res)=>{
 })
 
 const findRoute = asyncHandler( async (req,res)=>{
-  const schemaValidation = common.findRouteSchema.safeParse(req?.body)
+  const queries = req.query;
+  const schemaValidation = common.findRouteSchema.safeParse(queries)
+
   if(!schemaValidation.success)
     throw new ApiError(404,"schema validation failed",JSON.parse(schemaValidation.error.message))
 
@@ -118,9 +118,14 @@ const findRoute = asyncHandler( async (req,res)=>{
     .json(new ApiResponse(200,"route(s) found successfully",findRoute))
 })
 
+const getAllRoute = asyncHandler( async (req,res) => {
+  
+})
+
 
 export {
   createRoute,
   deleteRoute,
-  findRoute
+  findRoute,
+  getAllRoute
 }

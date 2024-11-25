@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  font-family: Inter, sans-serif;
+  margin: 0px;
+  padding: 0px;
+
+}
+
+@layer utilities {
+  .button-style {
+    @apply bg-[#2563eb] cursor-pointer py-3 px-6 rounded-md font-bold text-lg text-center text-white w-full
+  }
+
+  .form-style {
+    @apply flex flex-col p-4 border rounded-lg shadow-lg
+  }
+}
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+ */
