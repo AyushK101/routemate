@@ -36,7 +36,7 @@ to <>.
 
 ## I Have a Question
 
-> If you want to ask a question, we assume that you have read the available [Documentation](https://github.com/AyushK101/blob/master/README.md).
+> If you want to ask a question, we assume that you have read the available [Documentation](https://github.com/AyushK101/routemate/blob/master/README.md).
 
 Before you ask a question, it is best to search for existing [Issues](/issues) that might help you. In case you have found a suitable issue and still need clarification, you can write your question in this issue. It is also advisable to search the internet for answers first.
 
