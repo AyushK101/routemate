@@ -15,7 +15,7 @@ app.use(e.urlencoded({extended: true}))
 app.use(cookieParser())
 
 const CLIENT_URI = process.env.CLIENT_URI;
-// console.log(CLIENT_URI)
+console.log(CLIENT_URI)
 
 const options = {
   origin: [CLIENT_URI],
