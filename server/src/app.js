@@ -12,8 +12,10 @@ app.use(e.json({
 app.use(e.urlencoded({extended: true}))
 app.use(cookieParser())
 
+const CLIENT_URI = process.env.CLIENT_URI;
+
 const options = {
-  origin: ['http://localhost:5173','http://localhost:4173'],
+  origin: ['http://localhost:5173','http://localhost:4173',CLIENT_URI],
   credentials: true,
 }
 // app.options('*', cors(corsOptions));
