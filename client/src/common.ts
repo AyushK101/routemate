@@ -40,6 +40,7 @@ const findRouteSchema = z.object({
 type findRouteSchemaType = z.infer<typeof findRouteSchema>
 
 export {
+
   findRouteSchema,
   routeSchema,
   userSchema,
@@ -52,4 +53,3 @@ export type {
   loginSchemaType,
   routeSchemaType
 }
-

@@ -1,6 +1,7 @@
-import * as common from '../../common/src/index.ts' 
+import * as common from './common.ts' 
 
-const BASE_URI='https://routemate-server.vercel.app/'
+const BASE_URI = import.meta.env.VITE_BASE_URI;
+
 
 export {
   common,
