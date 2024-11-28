@@ -1,6 +1,6 @@
 import * as common from '../../common/src/index.ts' 
 
-const BASE_URI='http://localhost:3000/'
+const BASE_URI='https://routemate-server.vercel.app/'
 
 export {
   common,
