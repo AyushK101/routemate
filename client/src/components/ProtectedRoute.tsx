@@ -32,6 +32,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     if (status && isError) {
       console.log(isError)
       // console.log(error)
+      console.log("user logged out in protected route")
         dispatch(logoutUserSlice(false));
         navigate('/login'); // Navigate to login on error
     }

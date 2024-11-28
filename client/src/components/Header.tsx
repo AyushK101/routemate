@@ -24,6 +24,7 @@ const Header = () => {
       //   // showBoundary(error)
       } 
     if(isSuccess){
+      console.log("user logged out in Header")
       dispatch(logoutUserSlice(false))
       navigate('/login')
     }

@@ -81,6 +81,8 @@ const ResponseTable = () => {
       console.log(error)
       const customError  = error as customErrorForResponseTable;
       toast.error(`${customError?.data?.message}`,{icon: "🔴"})
+      console.log("user logged out in response table");
+      
       dispatch(logoutUserSlice(false))
     }
 

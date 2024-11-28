@@ -29,6 +29,7 @@ const Login = () => {
       navigate('/')
     }
     if(isError) {
+      console.log("user logged out in Login")
       dispatch(logoutUserSlice(false))
       // showBoundary(error)
     }
