@@ -31,10 +31,17 @@ const Signup = asyncHandler(async (req, res) => {
     if (!createdUser) throw new ApiError(500, "failed to fetch createdUser ");
 
     const token = createdUser.generateToken();
+
+    const options = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'None',
+      maxAge: 3600000
+    }
     
     res
       .status(200)
-      .cookie("token",token)
+      .cookie("token",token,options)
       .json(new ApiResponse(200, "user created successfully", createdUser));
 });
 
@@ -55,18 +62,20 @@ const Login = asyncHandler(async (req, res) => {
   if (!passwordChecking)
      throw new ApiError(404, "user not authorized");
 
+
   const options = {
     httpOnly: true,
-    secure: true,
-  };
-
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'None',
+    maxAge: 3600000
+  }
   //omitting password
   // const {password:ps, ...newObjectForSendingToFrontEnd} = userFinding;
   const userForFrontEnd = await User.findById(userFinding._id).select("-password")
   
   const token = userFinding.generateToken();
   return res
-    .cookie("token",token)
+    .cookie("token",token,options)
     .status(200)
     .json(new ApiResponse(200,"user logged IN successfully",{user: userForFrontEnd}))
 });
