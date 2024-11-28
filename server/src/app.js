@@ -2,7 +2,8 @@ import e from "express";
 import {globalErr} from "./utils/globalErrorCatch.js";
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-
+import dotenv from 'dotenv'
+dotenv.config()
 const app = e()
 
 app.use(e.json({
@@ -14,6 +15,7 @@ app.use(cookieParser())
 
 const CLIENT_URI = process.env.CLIENT_URI;
 
+console.log(CLIENT_URI)
 const options = {
   origin: ['http://localhost:5173','http://localhost:4173',CLIENT_URI],
   credentials: true,
