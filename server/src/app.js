@@ -17,7 +17,8 @@ const CLIENT_URI = process.env.CLIENT_URI;
 
 console.log(CLIENT_URI)
 const options = {
-  origin: ['http://localhost:5173','http://localhost:4173',CLIENT_URI],
+  origin: ["*"
+  ],
   credentials: true,
 }
 // app.options('*', cors(corsOptions));
