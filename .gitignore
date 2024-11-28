@@ -3,3 +3,6 @@ node_modules/
 .vscode
 routemate.postman_collection*
 README-temp.md
+
+vercel.json
+
