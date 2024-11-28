@@ -13,7 +13,7 @@ export const RouteDeleteBtn = ({routeId}: {routeId: string}) => {
 
   useEffect( ()=>{
     if(isError) {
-      console.log(error)
+      // console.log(error)
       toast.error("failed to delete route",{icon: "🔴"})
     }
     if(isSuccess) {

@@ -41,7 +41,7 @@ const Signup = () => {
     const response = await registerApi(data)
     if(isError && response.error ) {
       // showBoundary(response.error)
-      console.log(error)
+      // console.log(error)
 
     } else if (isSuccess) {
       // console.log(response.data)

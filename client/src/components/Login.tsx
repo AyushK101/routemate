@@ -32,7 +32,7 @@ const Login = () => {
       dispatch(logoutUserSlice(false))
       // showBoundary(error)
     }
-    console.log("isSuccess",isSuccess)
+    // console.log("isSuccess",isSuccess)
   },[data?.data?.user, dispatch, error, isError, isSuccess, navigate])
 
   async function subFunc(data: common.loginSchemaType) {
