@@ -81,7 +81,6 @@ export const userApi = createApi({
     baseUrl: BASE_URI ,
     mode: 'cors',
     credentials: 'include',
-    same
     // prepareHeaders: (headers) => {
     //   headers.set('Accept','application/json')
     //   return headers;
