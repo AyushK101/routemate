@@ -72,3 +72,13 @@ export interface customErrorForResponseTable {
 }
 
 export type SendMailType = genericResponseType<string>
+
+
+export type LoginErrorType = {
+  data: {
+    statusCode: number,
+    message: string,
+    stack: string
+  },
+  status: number
+}

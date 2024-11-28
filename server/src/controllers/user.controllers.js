@@ -60,7 +60,7 @@ const Login = asyncHandler(async (req, res) => {
   // console.log(userFinding)
   const passwordChecking = await userFinding.isPasswordCorrect(password);
   if (!passwordChecking)
-     throw new ApiError(404, "user not authorized");
+     throw new ApiError(404, "incorrect password ! ");
 
   console.log(process.env.NODE_ENV)
   const options = {

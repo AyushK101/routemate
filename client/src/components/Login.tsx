@@ -11,6 +11,7 @@ import Loading from "./Loading";
 import {   useNavigate } from "react-router";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { LoginErrorType } from "../types";
 
 const Login = () => {
   const [LoginUserApi,{isError,isLoading,isSuccess,error,data}] = useLoginUserApiMutation()
@@ -31,6 +32,9 @@ const Login = () => {
     if(isError) {
       console.log("user logged out in Login")
       dispatch(logoutUserSlice(false))
+      console.log(error)
+      const customError = error as LoginErrorType;
+      toast.error(`${customError?.data?.message || "generic error"}`, {icon: "🔴",duration: 900})
       // showBoundary(error)
     }
     // console.log("isSuccess",isSuccess)

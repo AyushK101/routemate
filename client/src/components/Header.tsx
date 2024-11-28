@@ -25,12 +25,12 @@ const Header = () => {
       } 
     if(isSuccess){
       console.log("user logged out in Header")
-      dispatch(logoutUserSlice(false))
       navigate('/login')
     }
   },[dispatch, error, isError, isSuccess, navigate])
 
   async function logoutFunc() {
+    dispatch(logoutUserSlice(false))
      await logoutUserApi(null)
   }
 

@@ -62,7 +62,9 @@ const columns = [
 ]
 
 const ResponseTable = () => {
-  const { isError, isLoading, isSuccess, data:ResponseData ,error }= useGetAllUserRoutesQuery([])
+  const { isError, isLoading, isSuccess, data:ResponseData ,error }= useGetAllUserRoutesQuery([],{
+    refetchOnMountOrArgChange: true
+  })
   const dispatch = useAppDispatch()
   let data: tableDataType[] = [];
   if(ResponseData) {

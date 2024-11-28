@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URI, common } from "../../constants";
+import { unsetSearchTable } from "../slices/searchSlice";
+import { logoutUserSlice } from "../slices/userSlice";
 //! /react -> automatically generate react hooks corresponding to endpoints
 
 
@@ -129,7 +131,11 @@ export const userApi = createApi({
           url: '/user/logout',
           method: 'POST',
         }),
-        invalidatesTags: ['currentUser']
+        invalidatesTags: ['currentUser'],
+        onQueryStarted: (dispatch) => {
+            dispatch(logoutUserSlice(false))
+            dispatch(unsetSearchTable())
+        }
       })
     }
 
