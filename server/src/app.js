@@ -17,8 +17,8 @@ const CLIENT_URI = process.env.CLIENT_URI;
 
 console.log(CLIENT_URI)
 const options = {
-  origin: ["*"
-  ],
+  origin: ["https://routemate-client.vercel.app/",],
+  methods: ["GET","PUT","POST","DELETE"],
   credentials: true,
 }
 // app.options('*', cors(corsOptions));
@@ -26,6 +26,10 @@ app.use(cors(options))
 
 import userRouter from './routes/user.routes.js'
 import rmRouter from './routes/routemate.routes.js'
+
+app.get('/',(req,res)=>{
+  res.status(200).json({"message": "user checked"});
+})
 
 app.use('/user',userRouter)
 app.use('/rm',rmRouter)

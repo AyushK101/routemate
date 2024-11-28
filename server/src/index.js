@@ -12,4 +12,7 @@ await dbConnect().then( _ => {
   })
 })
 
+export {
+  app
+}
 

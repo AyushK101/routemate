@@ -4,6 +4,12 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import * as common from '../utils/types.js';
 
+
+
+const Health = asyncHandler( async (req, res)=> {
+  return res.status(200).json({"message": "health check successful 🟢"});
+})
+
 const Signup = asyncHandler(async (req, res) => {
     const { username, email, password } = req?.body;
 
@@ -108,5 +114,6 @@ export {
   Login,
   Logout,
   deleteUser,
-  getCurrentUser
+  getCurrentUser,
+  Health
 };
