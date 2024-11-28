@@ -2,6 +2,8 @@ import e from "express";
 import {globalErr} from "./utils/globalErrorCatch.js";
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = e()
 
@@ -12,8 +14,11 @@ app.use(e.json({
 app.use(e.urlencoded({extended: true}))
 app.use(cookieParser())
 
+const CLIENT_URI = process.env.CLIENT_URI;
+// console.log(CLIENT_URI)
+
 const options = {
-  origin: ["https://routemate-client.vercel.app/",],
+  origin: [CLIENT_URI],
   methods: ["GET","PUT","POST","DELETE"],
   credentials: true,
 }
