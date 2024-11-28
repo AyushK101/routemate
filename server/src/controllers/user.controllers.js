@@ -62,7 +62,7 @@ const Login = asyncHandler(async (req, res) => {
   if (!passwordChecking)
      throw new ApiError(404, "user not authorized");
 
-
+  console.log(process.env.NODE_ENV)
   const options = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',

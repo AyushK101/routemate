@@ -62,7 +62,6 @@ export const routemateApi = createApi({
   reducerPath: "routemateApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URI,
-    mode: "cors",
     credentials: "include",
   }),
   tagTypes: ["onRouteCreate"],

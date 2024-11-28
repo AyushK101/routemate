@@ -18,8 +18,9 @@ const CLIENT_URI = process.env.CLIENT_URI;
 console.log(CLIENT_URI)
 
 const options = {
-  origin: [CLIENT_URI],
+  origin: CLIENT_URI,
   methods: ["GET","PUT","POST","DELETE"],
+  // allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }
 // app.options('*', cors(corsOptions));

@@ -79,7 +79,6 @@ export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URI ,
-    mode: 'cors',
     credentials: 'include',
     // prepareHeaders: (headers) => {
     //   headers.set('Accept','application/json')
