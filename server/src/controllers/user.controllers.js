@@ -37,14 +37,14 @@ const Login = asyncHandler(async (req, res) => {
 
   const schemaValidation = common.loginSchema.safeParse({email,password})
   if(!schemaValidation.success){
-    console.log({email,password})
+    // console.log({email,password})
     throw new ApiError(404,"schema validation failed",JSON.parse(schemaValidation.error.message))
   }
 
   const userFinding = await User.findOne({email});
   if (!userFinding)
     throw new ApiError(404, "user is not registered");
-  console.log(userFinding)
+  // console.log(userFinding)
   const passwordChecking = await userFinding.isPasswordCorrect(password);
   if (!passwordChecking)
      throw new ApiError(404, "user not authorized");
