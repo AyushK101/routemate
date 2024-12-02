@@ -97,7 +97,7 @@ const Login = asyncHandler( async (req, res )=> {
     const token = checkExisting.generateToken();
     // console.log("check",token)
     return res
-      .cookie("appToken",token)
+      .cookie("appToken",token,options)
       .status(200)
       .json(new ApiResponse(200,"user logged in successfully",token))
   } else {
@@ -107,7 +107,7 @@ const Login = asyncHandler( async (req, res )=> {
     const token = newUser.generateToken();
     // console.log("new",token)
     return res
-      .cookie("appToken",token)
+      .cookie("appToken",token,options)
       .status(200)
       .json(new ApiResponse(200,"user logged in successfully",token))
   }

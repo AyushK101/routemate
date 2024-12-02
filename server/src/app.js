@@ -7,11 +7,11 @@ dotenv.config()
 
 const app = e()
 
-// app.use( (req,res,next)=>{
-//   res.setHeader('Cross-Origin-Opener-Policy', 'unsafe-none');
-//   res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
-//   next()
-// })
+app.use( (req,res,next)=>{
+  res.setHeader('Cross-Origin-Opener-Policy', 'unsafe-none');
+  res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
+  next()
+})
 
 app.use(e.json({
   limit: "16kb",
