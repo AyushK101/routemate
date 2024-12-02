@@ -10,10 +10,9 @@ dotenv.config()
 
 const options = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
+  secure: true,
   sameSite: 'None',
   maxAge: 3600000,
-  domain: 'routemate-client.vercel.app'
 }
 
 console.log(options,process.env.NODE_ENV)
