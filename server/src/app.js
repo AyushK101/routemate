@@ -23,18 +23,18 @@ app.use(cookieParser())
 const CLIENT_URI = process.env.CLIENT_URI;
 console.log(CLIENT_URI)
 
-app.use((req, res, next) => {
-  // Set Cross-Origin-Opener-Policy (COOP)
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+// app.use((req, res, next) => {
+//   // Set Cross-Origin-Opener-Policy (COOP)
+//   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
 
-  // Set Cross-Origin-Embedder-Policy (COEP)
-  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+//   // Set Cross-Origin-Embedder-Policy (COEP)
+//   res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
 
-  // Other necessary headers like CORS
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  next(); 
-});
+//   // Other necessary headers like CORS
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   next(); 
+// });
 
 const options = {
   origin: CLIENT_URI,

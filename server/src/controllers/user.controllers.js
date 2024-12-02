@@ -4,6 +4,9 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import * as common from '../utils/types.js';
 import axios from 'axios'
+import dotenv from 'dotenv'
+dotenv.config()
+
 
 const options = {
   httpOnly: true,
@@ -13,6 +16,7 @@ const options = {
   domain: 'routemate-client.vercel.app'
 }
 
+console.log(options,process.env.NODE_ENV)
 
 const Health = asyncHandler( async (req, res)=> {
   return res.status(200).json({"message": "health check successful 🟢"});
