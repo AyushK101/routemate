@@ -10,7 +10,7 @@ import FormSection from "./FormSection";
 import SearchForm from "./SearchForm";
 import Input from "./Input";
 import Footer from './Footer';
-import Signup from './Signup';
+// import Signup from './Signup';
 import Container from './Container';
 import FallbackUI from './FallbackUi';
 import BuggyComponent from './BuggyComponent';
@@ -32,7 +32,7 @@ export {
   Input,
   SearchForm,
   Footer,
-  Signup,
+  // Signup,
   Container,
   FallbackUI,
   BuggyComponent,

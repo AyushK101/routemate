@@ -1,10 +1,10 @@
 
 import HomePage from './HomePage';
-import SignupPage from './SignupPage';
+// import SignupPage from './SignupPage';
 import LoginPage from './LoginPage';
 
 export {
   HomePage,
-  SignupPage,
+  // SignupPage,
   LoginPage
 }
