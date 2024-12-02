@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 
 const authJwt = asyncHandler(async (req,res,next)=>{
   try {
-    const token =  req?.cookies?.token;
+    const token =  req?.cookies?.appToken;
     if(!token)
       throw new ApiError(404,"token extraction failed")
     

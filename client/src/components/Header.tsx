@@ -16,7 +16,7 @@ const Header = () => {
   const navigate = useNavigate()
 
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
-  console.log(user?.picture)
+  // console.log(user?.picture)
   useEffect(()=>{
     if(isError) {
       console.log("in header",isError)

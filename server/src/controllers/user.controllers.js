@@ -9,7 +9,8 @@ const options = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
   sameSite: 'None',
-  maxAge: 3600000
+  maxAge: 3600000,
+  domain: 'routemate-client.vercel.app'
 }
 
 
@@ -92,7 +93,7 @@ const Login = asyncHandler( async (req, res )=> {
     const token = checkExisting.generateToken();
     // console.log("check",token)
     return res
-      .cookie("token",token)
+      .cookie("appToken",token)
       .status(200)
       .json(new ApiResponse(200,"user logged in successfully",token))
   } else {
@@ -102,7 +103,7 @@ const Login = asyncHandler( async (req, res )=> {
     const token = newUser.generateToken();
     // console.log("new",token)
     return res
-      .cookie("token",token)
+      .cookie("appToken",token)
       .status(200)
       .json(new ApiResponse(200,"user logged in successfully",token))
   }
@@ -110,7 +111,7 @@ const Login = asyncHandler( async (req, res )=> {
 
 const Logout = asyncHandler( async (req,res)=>{
   return res
-  .cookie("token","",options)
+  .cookie("appToken","",options)
   .status(200)
   .json(new ApiResponse(200,"use logged out successfully",))
 })
