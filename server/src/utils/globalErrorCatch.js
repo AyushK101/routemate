@@ -1,7 +1,8 @@
 
 
 
-export const globalErr  = (err, req, res ) => {  
+// eslint-disable-next-line no-unused-vars
+export const globalErr  = (err, req, res, next ) => {  
   if(err instanceof Error ) {
     /**
      * @😭😭😭😭😭😭😭😭😭😭😭😭
