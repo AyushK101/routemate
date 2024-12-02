@@ -13,9 +13,8 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  password: {
+  picture: {
     type: String,
-    required: true,
   }
 },{timestamps: true})
 
@@ -47,7 +46,7 @@ UserSchema.methods.generateToken  = function () {
       email: this.email
     },process.env.JWT_SECRET,{expiresIn: process.env.JWT_EXPIRE})
   } catch (error) {
-    throw new ApiError(500,"token generation failed")
+    throw new ApiError(500,"token generation failed",error)
   }
 }
 

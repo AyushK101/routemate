@@ -102,16 +102,17 @@ export const userApi = createApi({
         //   return response.data;
         // }
       }),
-      registerApi: builder.mutation<registerApiType,common.userSchemaType>({
-        query: (data: common.userSchemaType) => ({
+      registerApi: builder.mutation<registerApiType,{credentials: string}>({
+        query: (data: {credentials: string}) => ({
           url: "/user/signup",
           method: 'POST',
           body: data,
         }),
 
       }),
-      loginUserApi: builder.mutation<loginApiType,common.loginSchemaType>({
-        query: (data: common.loginSchemaType) => ({
+
+      loginUserApi: builder.mutation<loginApiType,{credentials: string}>({
+        query: (data: {credentials: string}) => ({
           url: "/user/login",
           method: 'POST',
           body: data
@@ -131,10 +132,11 @@ export const userApi = createApi({
           url: '/user/logout',
           method: 'POST',
         }),
-        invalidatesTags: ['currentUser'],
-        onQueryStarted: (dispatch) => {
-            dispatch(logoutUserSlice(false))
-            dispatch(unsetSearchTable())
+        async onQueryStarted(_, {queryFulfilled, dispatch, getCacheEntry}) {
+          await queryFulfilled
+          console.log(getCacheEntry());
+          dispatch(unsetSearchTable())
+          dispatch(logoutUserSlice(false))
         }
       })
     }
@@ -144,7 +146,7 @@ export const userApi = createApi({
 
 // auto-generated react hooks
 export const { 
-  useDeleteUserApiMutation,
+  // useDeleteUserApiMutation,
   useGetCurrentUserApiQuery,
   useLazyGetCurrentUserApiQuery,
   useLoginUserApiMutation,

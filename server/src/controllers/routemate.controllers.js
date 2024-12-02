@@ -7,7 +7,6 @@ import { User } from "../models/user.models.js";
 import mongoose from "mongoose";
 
 const createRoute = asyncHandler( async (req,res)=>{
-  const x= req?.body
   const schemaValidation = common.routeSchema.safeParse(req?.body)
   if(!schemaValidation.success)
     throw new ApiError(404,"route schema validation failed",JSON.parse(schemaValidation.error.message))
@@ -23,20 +22,20 @@ const createRoute = asyncHandler( async (req,res)=>{
   if (!mongoose.Types.ObjectId.isValid(userId))
     throw new ApiError(404,"Invalid userId");
 
-  const sameNameCheck = await User.findById(userId);
+  // const sameNameCheck = await User.findById(userId);
 
-  if(name !=sameNameCheck.username)
-    throw new ApiError(404,`Name don't matched with username. Will create ambiguity in DB.`,
-  {correctUser: sameNameCheck.username})
+  // if(name !=sameNameCheck.username)
+  //   throw new ApiError(404,`Name don't matched with username. Will create ambiguity in DB.`,
+  // {correctUser: sameNameCheck.username})
 
 
-  if(!mongoose.Types.ObjectId.isValid(sameNameCheck._id))
-    throw new ApiError(404,"sameNameCheck._id is not valid ObjectId() bson")
+  // if(!mongoose.Types.ObjectId.isValid(sameNameCheck._id))
+  //   throw new ApiError(404,"sameNameCheck._id is not valid ObjectId() bson")
 
   // const travelDateConversionToNewDate = new Date(travelDate).toISOString().split('T')[0]
 
   const existingRouteCheck = await RouteMate.findOne({
-    userId: sameNameCheck._id,
+    userId: req.user._id,
     source,
     destination,
     // travelDate: travelDateConversionToNewDate
@@ -46,7 +45,7 @@ const createRoute = asyncHandler( async (req,res)=>{
     throw new ApiError(404,"route already exists",existingRouteCheck)
 
   const routeCreate = await RouteMate.create({
-    userId: sameNameCheck._id,
+    userId: req.user._id,
     name,source,destination,gender,
     // travelDate: travelDateConversionToNewDate,
     travelDate,
@@ -61,7 +60,7 @@ const createRoute = asyncHandler( async (req,res)=>{
 })
 
 const deleteRoute = asyncHandler( async (req,res)=>{
-  const {_id:routeId} = req?.body
+  const {_id:routeId} = req.body
   // console.log(routeId)
   if(!routeId && !mongoose.Types.ObjectId(routeId))
     throw new ApiError(404,"testing")
@@ -131,8 +130,8 @@ const getAllRoute = asyncHandler( async (req,res) => {
 })
 
 const contactEmail = asyncHandler ( async (req,res) => {
-  const senderEmail = req?.user?.email
-  const {userId} = req?.body
+  // const senderEmail = req?.user?.email
+  const {userId} = req?.body || {}
   // console.log(userId)
   if(!userId)
     throw new ApiError(404,"userId is invalid",userId);

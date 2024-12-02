@@ -1,7 +1,7 @@
 
 
 
-export const globalErr  = (err, req, res,next ) => {  
+export const globalErr  = (err, req, res ) => {  
   if(err instanceof Error ) {
     /**
      * @😭😭😭😭😭😭😭😭😭😭😭😭
