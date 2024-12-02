@@ -16,7 +16,7 @@ const Header = () => {
   const navigate = useNavigate()
 
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
-
+  console.log(user?.picture)
   useEffect(()=>{
     if(isError) {
       console.log("in header",isError)
@@ -62,6 +62,7 @@ const Header = () => {
           </div>
           {authStatus ? (
               <>
+              <img src={user?.picture} alt="profile-picture" className='h-10 w-10 rounded-[50%]' />
               <h1>{user?.username}</h1>
               <Link to={'/login'} onClick={logoutFunc}>logout</Link></>) : (<Link to={'/'}>Login</Link>)}
         </div>
